@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { RoutePath } from '@core/constants/route-path';
 
 @Component({
   selector: 'app-home',
@@ -6,5 +7,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent {
+  public readonly routePath = RoutePath;
 
 }

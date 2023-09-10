@@ -1,12 +1,21 @@
 import { Injectable, TemplateRef } from '@angular/core';
 import { Router } from '@angular/router';
-import { DialogCloseResult, DialogRef, DialogResult, DialogService } from '@progress/kendo-angular-dialog';
 import { filter, Observable } from 'rxjs';
 import { ModalSettings } from '../models/modal-settings';
 import { RootInject } from 'app/app.module';
+import { MatDialog } from '@angular/material/dialog';
+import { ModalConfirmDialogComponent } from '@core/components/modal-confirm-dialog/modal-confirm-dialog.component';
 
 @Injectable({ providedIn: 'root' })
 export class ModalService {
+
+  constructor(private dialogSvc: MatDialog) {
+  }
+
+  public openConfirm(): Observable<{primary: boolean}> {
+    return this.dialogSvc.open(ModalConfirmDialogComponent).afterClosed();
+  }
+  /*
   private openDialogModals: DialogRef[] = [];
 
   constructor(private dialogService: DialogService, private router: Router) {
@@ -90,7 +99,7 @@ export class ModalService {
       this.openDialogModals.pop().close();
     }
     return hasOpened;
-  }
+  }*/
 }
 
 export function ConfirmAction(confirmationText: string = 'Confirm action ?'): any {

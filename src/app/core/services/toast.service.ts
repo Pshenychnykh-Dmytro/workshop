@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { NotificationService } from '@progress/kendo-angular-notification';
 import { Observable, tap, throwError } from 'rxjs';
 
 import { ToastSettings, ToastType } from '../models/toast-settings';
@@ -9,6 +8,7 @@ import { RootInject, AppModule } from 'app/app.module';
   providedIn: 'root',
 })
 export class EcnToastService {
+  /*
   constructor(private kendoNotificationService: NotificationService) {}
 
   success(message: string, alertId?: string): void {
@@ -44,6 +44,7 @@ export class EcnToastService {
       closable: alert.closable,
     });
   }
+  */
 }
 
 export function SuccessToast(successMessage = 'Success!') {

@@ -1,5 +1,3 @@
-import { DialogSettings } from '@progress/kendo-angular-dialog';
-
-export class ModalSettings extends DialogSettings {
+export class ModalSettings {
   wrapperClassNames: string[];
 }

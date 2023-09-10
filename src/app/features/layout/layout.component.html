@@ -5,14 +5,18 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav">
-        <a class="nav-link" routerLink="active" [routerLink]="[routePath.home]">Home</a>
-        <a class="nav-link" routerLink="active" [routerLink]="[routePath.products]">Products</a>
-        <a class="nav-link" routerLink="active" [routerLink]="[routePath.settings]">Settings</a>
-        <!--
-        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-        -->
-      </div>
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="active" [routerLink]="[routePath.home]">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="active" [routerLink]="[routePath.products]">Products</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="active" [routerLink]="[routePath.settings]">Settings</a>
+        </li>
+      </ul>
+      <h4 class="navbar-text">Angular Power</h4>
     </div>
   </div>
 </nav>
