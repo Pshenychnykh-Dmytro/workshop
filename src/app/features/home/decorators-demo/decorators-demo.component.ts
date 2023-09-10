@@ -20,7 +20,7 @@ export class DecoratorsDemoComponent implements OnInit {
     alert('action');
   }
 
-  // @ConfirmAction()
+  @ConfirmAction()
   public confirmActionAdvanced(): void {
     alert('action');
   }
