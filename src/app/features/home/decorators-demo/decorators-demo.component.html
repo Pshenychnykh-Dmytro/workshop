@@ -16,4 +16,20 @@
       <button type="button" class="btn btn-primary" (click)="confirmActionAdvanced()">Confirm Action</button>
     </div>
   </div>
+  <div class="row">
+    <div class="col p-2">
+      <div class="d-flex justify-content-start border p-2" style="width: 400px;">
+        <ng-container></ng-container>
+        <button class="btn btn-secondary mr-5" *ngFor="let item of users" (click)="deleteUser(item)">
+          (x) {{ item.name }}
+        </button>
+      </div>
+      <button class="ml-5 btn btn-primary" (click)="userSearch()">
+        Search
+      </button>
+    </div>
+    <div class="col">
+
+    </div>
+  </div>
 </div>

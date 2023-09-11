@@ -5,6 +5,8 @@ import { ModalSettings } from '../models/modal-settings';
 import { rootInject } from 'app/app.module';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalConfirmDialogComponent, ModalConfirmDialogData } from '@core/components/modal-confirm-dialog/modal-confirm-dialog.component';
+import { UserItemModel } from '@core/models/user-model';
+import { ModalUserSearchComponent } from '@core/components/modal-user-search/modal-user-search.component';
 
 @Injectable({ providedIn: 'root' })
 export class ModalService {
@@ -21,91 +23,16 @@ export class ModalService {
         data
     }).afterClosed();
   }
-  /*
-  private openDialogModals: DialogRef[] = [];
 
-  constructor(private dialogService: DialogService, private router: Router) {
-    this.closeAllOpenModalsOnRouteChange();
+  public openUserSearch(users: UserItemModel[]): Observable<UserItemModel[]> {
+    return this.dialogSvc.open(ModalUserSearchComponent,
+      {
+        disableClose: true,
+        closeOnNavigation: true,
+        minWidth: '1200px',
+        data: { users }
+    }).afterClosed();
   }
-
-  public openConfirm(
-    content: string | TemplateRef<any>,
-    textTitle: string = 'Confirm',
-    yesText: string = 'Yes',
-    noText: string = 'No'
-  ): Observable<DialogResult> {
-    const dialogRef = this.openDialog({
-      title: textTitle,
-      content,
-      actions: [
-        { text: noText, cssClass: 'btn btn-warning' },
-        { text: yesText, primary: true, cssClass: 'btn btn-success' },
-      ],
-      width: '95%',
-      maxWidth: 600,
-    } as ModalSettings);
-
-    dialogRef.dialog.location.nativeElement.classList.add('m-confirmation-dialog');
-
-    return dialogRef.result;
-  }
-
-  public openModal(options: ModalSettings): DialogRef {
-    const dialogRef = this.openDialog(options);
-
-    if (options.wrapperClassNames) {
-      options.wrapperClassNames.forEach((x) => dialogRef.dialog.location.nativeElement.classList.add(x));
-    }
-
-    return dialogRef;
-  }
-
-  public openInfo(content: string, textTitle: string = 'Info', buttonText: string = 'OK'): Observable<DialogResult> {
-    const dialogRef = this.openDialog({
-      title: textTitle,
-      content,
-      actions: [{ text: buttonText, primary: true, cssClass: 'btn btn-success' }],
-      width: '95%',
-      maxWidth: 700,
-    } as ModalSettings);
-
-    dialogRef.dialog.location.nativeElement.classList.add('m-info-dialog');
-
-    return dialogRef.result;
-  }
-
-  private openDialog(options: ModalSettings): DialogRef {
-    const dialogRef = this.dialogService.open(options);
-    this.openDialogModals.push(dialogRef);
-    this.handleModalClosing(dialogRef);
-    return dialogRef;
-  }
-
-  private handleModalClosing(dialogRef: DialogRef): void {
-    const subscription = dialogRef.result.subscribe((result) => {
-      if (result instanceof DialogCloseResult) {
-        this.openDialogModals = this.openDialogModals.filter((instance) => instance !== dialogRef);
-        subscription.unsubscribe();
-      }
-    });
-  }
-
-  private closeAllOpenModalsOnRouteChange(): void {
-    this.router.events.pipe(filter(() => this.openDialogModals.length > 0)).subscribe(() => this.cleanUpModals());
-  }
-
-  private cleanUpModals(): void {
-    this.openDialogModals.forEach((x) => x.close());
-    this.openDialogModals = [];
-  }
-
-  public tryCloseLastModal(): boolean {
-    const hasOpened = this.openDialogModals.length > 0;
-    if (hasOpened) {
-      this.openDialogModals.pop().close();
-    }
-    return hasOpened;
-  }*/
 }
 
 export function ConfirmAction(message = 'Confirm action ?',
@@ -116,6 +43,7 @@ export function ConfirmAction(message = 'Confirm action ?',
     const dialogSvc = rootInject(ModalService);
     const original = descriptor.value;
     descriptor.value = function (): any {
+      console.log(this['users']);
       dialogSvc.openConfirm({ title, message, yesButtonText, noButtonText }).subscribe((result: any) => {
         if (result.primary) {
           return original.apply(this, arguments);
@@ -124,4 +52,21 @@ export function ConfirmAction(message = 'Confirm action ?',
     };
     return descriptor;
   };
+}
+
+export function UserSearch(source: string): any {
+  return (target: any, propertyKey: string, descriptor: PropertyDescriptor): PropertyDescriptor => {
+    const dialogSvc = rootInject(ModalService);
+    const original = descriptor.value;
+    descriptor.value = function (): any {
+      console.log(this[source]);
+      dialogSvc.openUserSearch(this[source]).subscribe((result: any) => {
+        if(result.primary) {
+          return original.apply(this, [result.users]);
+        }
+      })
+    };
+    return descriptor;
+  };
+
 }
