@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, tap, throwError } from 'rxjs';
 
 import { ToastSettings, ToastType } from '../models/toast-settings';
-import { RootInject, AppModule } from 'app/app.module';
+import { rootInject, AppModule } from 'app/app.module';
 
 @Injectable({
   providedIn: 'root',
@@ -48,12 +48,12 @@ export class EcnToastService {
 }
 
 export function SuccessToast(successMessage = 'Success!') {
-  const toastSvc = RootInject(EcnToastService);
+  const toastSvc = rootInject(EcnToastService);
   toastSvc.success(successMessage);
 }
 
 export function ErrorToast(errorMessage = 'Error!') {
-  const toastSvc = RootInject(EcnToastService);
+  const toastSvc = rootInject(EcnToastService);
   toastSvc.error(errorMessage);
 }
 
@@ -62,7 +62,7 @@ export function AsyncResponseToast(
   errorHandler?: (error: any) => void
 ): any {
   return (target: any, propertyKey: string, descriptor: PropertyDescriptor): PropertyDescriptor => {
-    const toastSvc = RootInject(EcnToastService);
+    const toastSvc = rootInject(EcnToastService);
     const origin = descriptor.value;
     descriptor.value = function (): any {
       return origin.apply(this, arguments).pipe(

@@ -8,8 +8,7 @@ import { ConfirmAction, ModalService } from '@core/services/modal.service';
 })
 export class DecoratorsDemoComponent implements OnInit {
 
-  //private modalSvc: ModalService
-  constructor() {
+  constructor(private modalSvc: ModalService) {
   }
 
   ngOnInit(): void {
@@ -17,11 +16,18 @@ export class DecoratorsDemoComponent implements OnInit {
   }
 
   public confirmActionDefault(): void {
-    alert('action');
+    this.modalSvc.openConfirm({
+      message: 'Are you sure to make operation ?',
+    })
+    .subscribe(x => {
+      if(x.primary) {
+        alert('Default action');
+      }
+    });
   }
 
   @ConfirmAction()
   public confirmActionAdvanced(): void {
-    alert('action');
+    alert('Advanced action');
   }
 }

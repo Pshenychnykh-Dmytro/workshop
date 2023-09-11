@@ -1,6 +1,6 @@
 import { Injector, NgModule, ProviderToken } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MAT_DIALOG_DEFAULT_OPTIONS, MatDialogConfig, MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -26,6 +26,6 @@ export class AppModule {
   }
 }
 
-export function RootInject<T>(token: ProviderToken<T>): any {
+export function rootInject<T>(token: ProviderToken<T>): any {
   return AppModule.injector.get<T>(token);
 }

@@ -1,10 +1,10 @@
-import { Injectable, TemplateRef } from '@angular/core';
+import { Injectable, TemplateRef, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { filter, Observable } from 'rxjs';
 import { ModalSettings } from '../models/modal-settings';
-import { RootInject } from 'app/app.module';
+import { rootInject } from 'app/app.module';
 import { MatDialog } from '@angular/material/dialog';
-import { ModalConfirmDialogComponent } from '@core/components/modal-confirm-dialog/modal-confirm-dialog.component';
+import { ModalConfirmDialogComponent, ModalConfirmDialogData } from '@core/components/modal-confirm-dialog/modal-confirm-dialog.component';
 
 @Injectable({ providedIn: 'root' })
 export class ModalService {
@@ -12,8 +12,14 @@ export class ModalService {
   constructor(private dialogSvc: MatDialog) {
   }
 
-  public openConfirm(): Observable<{primary: boolean}> {
-    return this.dialogSvc.open(ModalConfirmDialogComponent).afterClosed();
+  public openConfirm(data: ModalConfirmDialogData=null): Observable<{primary: boolean}> {
+    return this.dialogSvc.open(ModalConfirmDialogComponent,
+      {
+        disableClose: true,
+        closeOnNavigation: true,
+        minWidth: '400px',
+        data
+    }).afterClosed();
   }
   /*
   private openDialogModals: DialogRef[] = [];
@@ -102,12 +108,15 @@ export class ModalService {
   }*/
 }
 
-export function ConfirmAction(confirmationText: string = 'Confirm action ?'): any {
+export function ConfirmAction(message = 'Confirm action ?',
+                              title = 'Confirm',
+                              yesButtonText = 'Yes',
+                              noButtonText = 'No'): any {
   return (target: any, propertyKey: string, descriptor: PropertyDescriptor): PropertyDescriptor => {
-    const dialogSvc = RootInject(ModalService);
+    const dialogSvc = rootInject(ModalService);
     const original = descriptor.value;
     descriptor.value = function (): any {
-      dialogSvc.openConfirm(confirmationText).subscribe((result: any) => {
+      dialogSvc.openConfirm({ title, message, yesButtonText, noButtonText }).subscribe((result: any) => {
         if (result.primary) {
           return original.apply(this, arguments);
         }
