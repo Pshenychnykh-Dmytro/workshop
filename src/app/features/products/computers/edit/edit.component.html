@@ -1,1 +1,63 @@
-<p>edit works!</p>
+
+<!--
+<div *ngIf="loading" class="d-flex justify-content-center">
+  <div class="spinner-border p-3" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>
+-->
+<app-edit-page [loading]="loading"
+               [useProvider]="true"
+               [formGroup]="formGroup">
+  <h3>Computer</h3>
+  <!--<form [formGroup]="formGroup">-->
+    <div class="row">
+      <div class="col">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">ID</span>
+          </div>
+          <input [formControlName]="controlNames.id" readonly type="text" class="form-control" placeholder="ID" aria-label="Username" aria-describedby="basic-addon1">
+        </div>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">Model</span>
+          </div>
+          <input [formControlName]="controlNames.model"
+                 [class.is-invalid]="controlError$[controlNames.model] | async"
+                 type="text" class="form-control" placeholder="Model" aria-label="Username" aria-describedby="basic-addon1">
+        </div>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">Series</span>
+          </div>
+          <input [formControlName]="controlNames.series"  type="text" class="form-control" placeholder="Series" aria-label="Username" aria-describedby="basic-addon1">
+        </div>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">HDD</span>
+          </div>
+          <input [formControlName]="controlNames.hdd"  type="text" class="form-control" placeholder="HDD" aria-label="Username" aria-describedby="basic-addon1">
+        </div>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">Memory</span>
+          </div>
+          <input [formControlName]="controlNames.memory"  type="text" class="form-control" placeholder="Memory" aria-label="Username" aria-describedby="basic-addon1">
+        </div>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">Type</span>
+          </div>
+          <input [formControlName]="controlNames.type"  type="text" class="form-control" placeholder="Type" aria-label="Type" aria-describedby="basic-addon1">
+        </div>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">Price</span>
+          </div>
+          <input [formControlName]="controlNames.price"  type="text" class="form-control" placeholder="Type" aria-label="Type" aria-describedby="basic-addon1">
+        </div>
+      </div>
+    </div>
+  <!--</form>-->
+</app-edit-page>

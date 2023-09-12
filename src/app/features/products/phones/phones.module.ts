@@ -4,6 +4,8 @@ import { CommonModule } from '@angular/common';
 import { PhonesRoutingModule } from './phones-routing.module';
 import { ListComponent } from './list/list.component';
 import { EditComponent } from './edit/edit.component';
+import { MatTableModule } from '@angular/material/table';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -13,7 +15,10 @@ import { EditComponent } from './edit/edit.component';
   ],
   imports: [
     CommonModule,
-    PhonesRoutingModule
+    PhonesRoutingModule,
+    MatTableModule,
+    ReactiveFormsModule,
+    FormsModule
   ]
 })
 export class PhonesModule { }

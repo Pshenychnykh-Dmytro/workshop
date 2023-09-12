@@ -1,7 +1,7 @@
 import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { inject } from '@angular/core';
 
 /*
@@ -22,7 +22,7 @@ import { inject } from '@angular/core';
 */
 export abstract class BasePage {
   private _loading = true;
-  private _loadingChanged$: Subject<boolean> = new Subject();
+  private _loadingChanged$: BehaviorSubject<boolean> = new BehaviorSubject(this._loading);
 
   // * turn on/of loader and indicates when page in loading process
   public get loading() {

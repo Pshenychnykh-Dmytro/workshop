@@ -5,6 +5,9 @@ import { ComputersRoutingModule } from './computers-routing.module';
 import { ListComponent } from './list/list.component';
 import { EditComponent } from './edit/edit.component';
 import { ComputerService } from './computer.service';
+import { MatTableModule } from '@angular/material/table';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from '@shared/shared.module';
 
 
 @NgModule({
@@ -14,7 +17,11 @@ import { ComputerService } from './computer.service';
   ],
   imports: [
     CommonModule,
-    ComputersRoutingModule
+    ComputersRoutingModule,
+    MatTableModule,
+    ReactiveFormsModule,
+    FormsModule,
+    SharedModule
   ],
   providers: [
     ComputerService

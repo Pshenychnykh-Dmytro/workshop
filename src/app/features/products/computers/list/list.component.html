@@ -1,1 +1,53 @@
-<p>list works!</p>
+<div>
+  <div class="d-flex justify-content-end">
+    <div class="pt-3 pb-3">
+      <button class="btn btn-primary" [routerLink]="[routePath.create]">Create</button>
+    </div>
+  </div>
+</div>
+<div>
+  <div class="d-flex justify-content-center mt-10">
+    <table mat-table [dataSource]="items" class="mat-elevation-z8">
+
+      <!--- Note that these columns can be defined in any order.
+            The actual rendered columns are set as a property on the row definition" -->
+
+      <!-- Position Column -->
+      <ng-container [matColumnDef]="itemNames.id">
+        <th mat-header-cell *matHeaderCellDef> Id </th>
+        <td mat-cell *matCellDef="let element"> {{ element.id }} </td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container [matColumnDef]="itemNames.model">
+        <th mat-header-cell *matHeaderCellDef> Model </th>
+        <td mat-cell *matCellDef="let element"> {{ element.model }} </td>
+      </ng-container>
+
+      <!-- Weight Column -->
+      <ng-container [matColumnDef]="itemNames.series">
+        <th mat-header-cell *matHeaderCellDef> Series </th>
+        <td mat-cell *matCellDef="let element"> <button [routerLink]="[element.id]" class="btn btn-link">{{ element.series }}</button></td>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container [matColumnDef]="itemNames.type">
+        <th mat-header-cell *matHeaderCellDef> Type </th>
+        <td mat-cell *matCellDef="let element"> {{ element.type }} </td>
+      </ng-container>
+      <!-- Symbol Column -->
+      <ng-container [matColumnDef]="itemNames.price">
+        <th mat-header-cell *matHeaderCellDef> Price </th>
+        <td mat-cell *matCellDef="let element"> {{ element.price }} </td>
+      </ng-container>
+      <!--
+      <ng-container matColumnDef="selected">
+        <th mat-header-cell *matHeaderCellDef> Selected </th>
+        <td mat-cell *matCellDef="let element"> <input type="checkbox" [(ngModel)]="element.selected"></td>
+      </ng-container>
+      -->
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+</div>

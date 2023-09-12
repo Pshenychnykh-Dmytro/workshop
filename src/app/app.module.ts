@@ -5,8 +5,9 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ContextHttpInterceptor } from '@core/interceptors/context-http.interceptor';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatSnackBarModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [], //{ provide: HTTP_INTERCEPTORS, useClass: ContextHttpInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule {

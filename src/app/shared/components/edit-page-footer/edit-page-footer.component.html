@@ -1,0 +1,37 @@
+<div class="d-flex justify-content-end">
+  <div class="p-2">
+    <ng-container *ngTemplateOutlet="removeParentTmp || removeTmp">
+    </ng-container>
+  </div>
+  <div class="p-2">
+    <ng-container *ngTemplateOutlet="cancelParentTmp || cancelTmp">
+    </ng-container>
+  </div>
+  <div class="p-2">
+    <ng-container *ngTemplateOutlet="saveParentTmp || saveTmp">
+    </ng-container>
+  </div>
+</div>
+<ng-template #removeTmp
+             let-item>
+  <button *ngIf="removeEnabled"
+          (click)="remove()"
+          type="button"
+          class="btn btn-danger">{{ removeTitle }}</button>
+</ng-template>
+<ng-template #cancelTmp
+             let-item>
+  <button (click)="cancel()"
+          type="button"
+          class="btn btn-warning">{{ cancelTitle }}</button>
+</ng-template>
+<ng-template #saveTmp>
+  <button *ngIf="onSave.observed"
+          (click)="save()"
+          type="button"
+          class="btn btn-success">{{ saveTitle }}</button>
+  <button *ngIf="!onSave.observed"
+          kendoButton
+          type="submit"
+          class="btn btn-success">{{ saveTitle }}</button>
+</ng-template>
