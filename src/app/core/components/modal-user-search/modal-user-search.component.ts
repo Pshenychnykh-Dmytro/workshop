@@ -5,6 +5,8 @@ import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/materia
 import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-modal-user-search',
@@ -12,7 +14,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   styleUrls: ['./modal-user-search.component.scss'],
   providers: [ModalUserSearchService],
   standalone: true,
-  imports: [MatDialogModule, MatButtonModule, MatTableModule, ReactiveFormsModule, FormsModule]
+  imports: [CommonModule, HttpClientModule, MatDialogModule, MatButtonModule, MatTableModule, ReactiveFormsModule, FormsModule]
 })
 export class ModalUserSearchComponent implements OnInit {
   public displayedColumns: string[] = ['id', 'name', 'age', 'email', 'gender', 'selected'];

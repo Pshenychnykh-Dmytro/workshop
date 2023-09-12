@@ -9,27 +9,11 @@
   <div class="row">
     <div class="col">
       <h4>Default Approach</h4>
-      <button type="button" class="btn btn-primary" (click)="confirmActionDefault()">Confirm Action</button>
+      <app-default-approach></app-default-approach>
     </div>
     <div class="col">
       <h4>Decorators Approach</h4>
-      <button type="button" class="btn btn-primary" (click)="confirmActionAdvanced()">Confirm Action</button>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col p-2">
-      <div class="d-flex justify-content-start border p-2" style="width: 400px;">
-        <ng-container></ng-container>
-        <button class="btn btn-secondary mr-5" *ngFor="let item of users" (click)="deleteUser(item)">
-          (x) {{ item.name }}
-        </button>
-      </div>
-      <button class="ml-5 btn btn-primary" (click)="userSearch()">
-        Search
-      </button>
-    </div>
-    <div class="col">
-
+      <app-advanced-approach></app-advanced-approach>
     </div>
   </div>
 </div>

@@ -1,1 +1,34 @@
-<p>guards-demo works!</p>
+<div class="row">
+  <div class="col">
+    <h3>Profile</h3>
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon1">@</span>
+      </div>
+      <input [(ngModel)]="model.name" type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+    </div>
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon1">@</span>
+      </div>
+      <input [(ngModel)]="model.email" type="text" class="form-control" placeholder="Email" aria-label="Username" aria-describedby="basic-addon1">
+    </div>
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon1">@</span>
+      </div>
+      <input [(ngModel)]="model.address"  type="text" class="form-control" placeholder="Address" aria-label="Username" aria-describedby="basic-addon1">
+    </div>
+  </div>
+  <div class="col">
+    <h3>Options</h3>
+    <div class="d-flex justify-content-start">
+      <div *ngFor="let item of model.options" class="border p-2 mr-2">
+        <label>
+          <input type="checkbox" [(ngModel)]="item.selected">
+          {{ item.name }}
+        </label>
+      </div>
+    </div>
+  </div>
+</div>

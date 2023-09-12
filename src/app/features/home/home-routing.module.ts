@@ -4,6 +4,7 @@ import { HomeComponent } from './home.component';
 import { RoutePath } from '@core/constants/route-path';
 import { DecoratorsDemoComponent } from './decorators-demo/decorators-demo.component';
 import { GuardsDemoComponent } from './guards-demo/guards-demo.component';
+import { DiscardChangesFn } from '@core/guards/discard-changes.guard';
 
 const routes: Routes = [{
   path: '',
@@ -20,7 +21,8 @@ const routes: Routes = [{
     },
     {
       path: RoutePath.demo2,
-      component: GuardsDemoComponent
+      component: GuardsDemoComponent,
+      canDeactivate: [DiscardChangesFn]
     }
   ]
 }];

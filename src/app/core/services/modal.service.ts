@@ -24,7 +24,7 @@ export class ModalService {
     }).afterClosed();
   }
 
-  public openUserSearch(users: UserItemModel[]): Observable<UserItemModel[]> {
+  public openUserSearch(users: UserItemModel[]): Observable<{ primary: boolean, users: UserItemModel[] }> {
     return this.dialogSvc.open(ModalUserSearchComponent,
       {
         disableClose: true,
@@ -43,7 +43,6 @@ export function ConfirmAction(message = 'Confirm action ?',
     const dialogSvc = rootInject(ModalService);
     const original = descriptor.value;
     descriptor.value = function (): any {
-      console.log(this['users']);
       dialogSvc.openConfirm({ title, message, yesButtonText, noButtonText }).subscribe((result: any) => {
         if (result.primary) {
           return original.apply(this, arguments);

@@ -1,59 +1,35 @@
 import { Injectable } from '@angular/core';
 import { Observable, tap, throwError } from 'rxjs';
-
-import { ToastSettings, ToastType } from '../models/toast-settings';
-import { rootInject, AppModule } from 'app/app.module';
+import { rootInject } from 'app/app.module';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root',
 })
-export class EcnToastService {
-  /*
-  constructor(private kendoNotificationService: NotificationService) {}
-
-  success(message: string, alertId?: string): void {
-    this.show(new ToastSettings({ message, type: ToastType.Success, alertId }));
+export class ToastService {
+  constructor(private snackBar: MatSnackBar) {
   }
 
-  error(message: any, alertId?: string): void {
-    const msg = (message?.message ? message.message : String(message)) as string;
-    this.show(new ToastSettings({ message: msg, type: ToastType.Error, alertId }));
-  }
-
-  pipeError(message: string, alertId?: string): Observable<any> {
-    this.error(message, alertId);
-    return throwError(() => message);
-  }
-
-  info(message: string, alertId?: string): void {
-    this.show(new ToastSettings({ message, type: ToastType.Info, alertId }));
-  }
-
-  warn(message: string, alertId?: string): void {
-    this.show(new ToastSettings({ message, type: ToastType.Warning, alertId }));
-  }
-
-  private show(alert: ToastSettings): void {
-    this.kendoNotificationService.show({
-      content: alert.message,
-      hideAfter: 1000,
-      position: { horizontal: 'right', vertical: 'bottom' },
-      animation: { type: 'fade', duration: 1000 },
-      type: { style: alert.type, icon: true },
-      height: 35,
-      closable: alert.closable,
+  private open(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 1000,
+      horizontalPosition: 'end',
+      verticalPosition: 'bottom'
     });
   }
-  */
+
+  public success(message: string = 'Success !') {
+    this.open(message, 'ok');
+  }
 }
 
 export function SuccessToast(successMessage = 'Success!') {
-  const toastSvc = rootInject(EcnToastService);
+  const toastSvc = rootInject(ToastService);
   toastSvc.success(successMessage);
 }
 
 export function ErrorToast(errorMessage = 'Error!') {
-  const toastSvc = rootInject(EcnToastService);
+  const toastSvc = rootInject(ToastService);
   toastSvc.error(errorMessage);
 }
 
@@ -62,11 +38,10 @@ export function AsyncResponseToast(
   errorHandler?: (error: any) => void
 ): any {
   return (target: any, propertyKey: string, descriptor: PropertyDescriptor): PropertyDescriptor => {
-    const toastSvc = rootInject(EcnToastService);
+    const toastSvc = rootInject(ToastService);
     const origin = descriptor.value;
     descriptor.value = function (): any {
       return origin.apply(this, arguments).pipe(
-        // tap(() => toastSvc.success(successMessage)),
         tap({
           next: () => toastSvc.success(successMessage),
           error: ({ status, message, source }) => {
