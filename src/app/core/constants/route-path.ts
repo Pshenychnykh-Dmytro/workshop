@@ -8,5 +8,7 @@ export enum RoutePath {
   phones = 'phones',
 
   demo1 = 'demo1',
-  demo2 = 'demo2'
+  demo2 = 'demo2',
+
+  create = 'create'
 }

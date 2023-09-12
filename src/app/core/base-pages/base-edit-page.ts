@@ -2,9 +2,9 @@ import { ITouchable } from '../interfaces/touchable';
 import { BasePage } from './base-page';
 
 export abstract class BaseEditPage extends BasePage implements ITouchable {
-  get isTouched(): boolean {
-    return false;
-  }
+  abstract get isTouched(): boolean; // {
+    // return false;
+  // }
 
   /*
    * @Description:
