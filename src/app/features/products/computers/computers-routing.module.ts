@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ListComponent } from './list/list.component';
 import { EditComponent } from './edit/edit.component';
 import { RoutePath } from '@core/constants/route-path';
+import { DiscardChangesFn } from '@core/guards/discard-changes.guard';
 
 const routes: Routes = [
   {
@@ -15,7 +16,8 @@ const routes: Routes = [
   },
   {
     path: ':id',
-    component: EditComponent
+    component: EditComponent,
+    canDeactivate: [DiscardChangesFn]
   }
 ];
 

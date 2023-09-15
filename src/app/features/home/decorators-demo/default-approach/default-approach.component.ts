@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserItemModel } from '@core/models/user-model';
-import { ModalService } from '@core/services/modal.service';
+import { ConfirmAction, ModalService } from '@core/services/modal.service';
 import { DataService } from '../../data.service';
 import { tap } from 'rxjs';
 import { ToastService } from '@core/services/toast.service';
@@ -22,22 +22,14 @@ export class DefaultApproachComponent implements OnInit {
     this.dataSvc.getSelectedUsers().subscribe(users => this.userList = users)
   }
 
+
+  @ConfirmAction('ARE YOU WANNA GE USERS ?')
   public loadUsers(): void {
-    this.modalSvc.openConfirm({
-      message: 'Are you sure to make operation ?',
-    })
-    .subscribe(x => {
-      if(x.primary) {
         this.dataSvc.getSelectedUsers()
         .pipe(
           tap({
             next: () =>this.toastSvc.success()
-          }))
-        .subscribe(users => {
-          this.userList = users;
-        });
-      }
-    });
+          })).subscribe(users => this.userList = users)
   }
 
   public userSearch(): void {

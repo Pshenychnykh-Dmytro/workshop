@@ -6,11 +6,10 @@
   </div>
 </div>
 -->
-<app-edit-page [loading]="loading"
-               [useProvider]="true"
-               [formGroup]="formGroup">
+<app-edit-page [useProvider]="true">
   <h3>Computer</h3>
-  <!--<form [formGroup]="formGroup">-->
+  <ng-template appFormContent>
+    <ng-container [formGroup]="formGroup">
     <div class="row">
       <div class="col">
         <div class="input-group mb-3">
@@ -59,5 +58,6 @@
         </div>
       </div>
     </div>
-  <!--</form>-->
+    </ng-container>
+  </ng-template>
 </app-edit-page>

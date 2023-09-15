@@ -1,5 +1,5 @@
 import { AbstractControl, UntypedFormArray, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
-import { map, merge, Observable, of, switchMap, timer } from 'rxjs';
+import { firstValueFrom, map, merge, Observable, of, switchMap, timer } from 'rxjs';
 
 import { ITouchable } from '@core/interfaces/touchable';
 import { ICrudService } from '@core/interfaces/crud.service';
@@ -61,7 +61,7 @@ export abstract class BaseFormPageComponent<TModel> extends BaseEditPage impleme
    * @Params:
    *    paramName - Name of the url route id param. (for example 'userId');
    */
-  protected initByRouteParam(paramName: string): void {
+  public initByRouteParam(paramName: string): void {
     this.editMode = !!(this._id = paramName ? +this.findParam(paramName) : null);
     this._initByEditMode(this.editMode);
   }
@@ -413,10 +413,7 @@ export abstract class BaseFormPageComponent<TModel> extends BaseEditPage impleme
 
   private _initDiscardChangesFeature(formGroup: UntypedFormGroup): void {
     this.formGroup?.markAsUntouched();
-    const subscription = formGroup?.valueChanges.subscribe(() => {
-      this._isTouched = true;
-      subscription.unsubscribe();
-    });
+    firstValueFrom(formGroup?.valueChanges).then(() => this._isTouched = true);
   }
 
   private _validateUniqueAsync(originValue, callback: (value) => Observable<{ invalid: boolean }>) {

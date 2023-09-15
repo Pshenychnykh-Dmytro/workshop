@@ -26,7 +26,7 @@ export class GuardsDemoComponent implements OnInit, ITouchable {
   }
 
   get discardChangesMessage(): string {
-    return null;
+    return 'Custom message OK?';
   }
 
   ngOnInit(): void {

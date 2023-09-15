@@ -1,5 +1,5 @@
 import { AfterContentInit, AfterViewInit, ChangeDetectorRef, Component, ContentChild, DoCheck, EventEmitter, Input, OnInit, Optional, Output } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, FormGroupDirective } from '@angular/forms';
 import { BaseFormPageComponent } from '@core/base-pages/base-form-page';
 import { FormContentDirective } from '@shared/directives/form-content.directive';
 import { PageFooterDirective } from '@shared/directives/page-footer.directive';
@@ -25,8 +25,10 @@ export class EditPageComponent implements OnInit, AfterViewInit, AfterContentIni
   @Input()
   public formGroup: FormGroup;
 
+  public viewLoaded = false;
+
   public get formGroupProp(): FormGroup {
-    return this.useProvider ? this.formGroup : null;
+    return this.useProvider ? this.parent.formGroup : null; // this.formGroup : null;
   }
 
   public get loadingProp(): boolean {
@@ -47,13 +49,22 @@ export class EditPageComponent implements OnInit, AfterViewInit, AfterContentIni
   @ContentChild(PageFooterDirective)
   pageFooter?: PageFooterDirective;
 
-  constructor(@Optional() private parent: BaseFormPageComponent<any>, private detector: ChangeDetectorRef) { }
+  constructor(@Optional()
+              private parent: BaseFormPageComponent<any>,
+              private detector: ChangeDetectorRef)
+              //public formGroupDirective: FormGroupDirective)
+  { }
 
   ngOnInit(): void {
+
+    // this.parent.initByRouteParam('id');
+
+    // this.formGroupDirective.form
   }
 
   ngAfterContentInit(): void {
     if(this.useProvider) {
+      // const fg = this.formGroupDirective;
       // this.parent.loadingChanged.subscribe(loading => this.loading = loading);
     }
   }
@@ -63,6 +74,7 @@ export class EditPageComponent implements OnInit, AfterViewInit, AfterContentIni
     if(this.useProvider) {
       this.parent.loadingChanged.subscribe(loading => this.loading = loading);
     }*/
+    // this.viewLoaded = true;
   }
 
   ngDoCheck(): void {

@@ -1,21 +1,21 @@
-<div *ngIf="loadingProp; else contentBlock" class="d-flex justify-content-center">
+<div *ngIf="loadingProp; else useProvider ? providerBlock : defaultBlock" class="d-flex justify-content-center">
   <div class="spinner-border p-3" role="status">
     <span class="visually-hidden">Loading...</span>
   </div>
 </div>
-<ng-template #contentBlock>
-    <!--
-    <ng-content *ngIf="!useProvider">
-    </ng-content>
-    -->
-    <form *ngIf="useProvider" [formGroup]="formGroupProp" (ngSubmit)="save()">
-      <ng-content>
-      </ng-content>
-      <!--<ng-container *ngTemplateOutlet="formContent?.templateRef || defaultContent; context: { $implicit: formGroupProp }"></ng-container>-->
-      <ng-container *ngIf="useProvider">
-        <ng-container *ngTemplateOutlet="pageFooter?.templateRef || defaultFooter;"></ng-container>
-      </ng-container>
-    </form>
+
+
+<ng-template #providerBlock>
+  <form [formGroup]="formGroupProp"
+        (ngSubmit)="save()">
+    <ng-container *ngTemplateOutlet="formContent?.templateRef || defaultContent; context: { $implicit: formGroupProp }"></ng-container>
+    <ng-container *ngTemplateOutlet="pageFooter?.templateRef || defaultFooter;"></ng-container>
+  </form>
+</ng-template>
+
+<ng-template #defaultBlock>
+  <ng-container *ngTemplateOutlet="formContent?.templateRef || defaultContent;"></ng-container>
+  <ng-container *ngTemplateOutlet="pageFooter?.templateRef || defaultFooter;"></ng-container>
 </ng-template>
 
 <ng-template #defaultFooter>
@@ -27,6 +27,7 @@
                         (onCancel)="cancel()">
   </app-edit-page-footer>
 </ng-template>
+
 <ng-template #defaultContent>
   <p>
     <b>It looks like you trying to use "userProvider" feature</b>
