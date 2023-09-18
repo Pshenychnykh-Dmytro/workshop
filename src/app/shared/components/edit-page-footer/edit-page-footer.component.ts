@@ -14,7 +14,11 @@ export class EditPageFooterComponent extends BasePage {
   @Input()
   public saveTitle = 'Save';
   @Input()
-  public removeEnabled = false;
+  public removeEnabled = true;
+  @Input()
+  public cancelEnabled = true;
+  @Input()
+  public saveEnabled = true;
 
   @Output() onSave = new EventEmitter();
   @Output() onCancel = new EventEmitter();
@@ -41,7 +45,7 @@ export class EditPageFooterComponent extends BasePage {
     if (this.onCancel.observed) {
       this.onCancel.emit();
     } else {
-      this.goBack();
+      // this.goBack();
     }
   }
 

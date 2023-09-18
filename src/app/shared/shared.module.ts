@@ -5,6 +5,7 @@ import { EditPageFooterComponent } from './components/edit-page-footer/edit-page
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormContentDirective } from './directives/form-content.directive';
 import { PageFooterDirective } from './directives/page-footer.directive';
+import { BaseFormPageProviderDirective } from './directives/base-form-page-provider.directive';
 
 
 
@@ -13,7 +14,8 @@ import { PageFooterDirective } from './directives/page-footer.directive';
     EditPageComponent,
     EditPageFooterComponent,
     FormContentDirective,
-    PageFooterDirective
+    PageFooterDirective,
+    BaseFormPageProviderDirective
   ],
   imports: [
     CommonModule,

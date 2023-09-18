@@ -12,25 +12,26 @@
     </ng-container>
   </div>
 </div>
-<ng-template #removeTmp
-             let-item>
-  <button *ngIf="removeEnabled"
+<ng-template #removeTmp>
+  <button *ngIf="removeEnabled && onRemove.observed"
           (click)="remove()"
           type="button"
           class="btn btn-danger">{{ removeTitle }}</button>
 </ng-template>
-<ng-template #cancelTmp
-             let-item>
-  <button (click)="cancel()"
+<ng-template #cancelTmp>
+  <button *ngIf="cancelEnabled && onCancel.observed"
+          (click)="cancel()"
           type="button"
           class="btn btn-warning">{{ cancelTitle }}</button>
 </ng-template>
 <ng-template #saveTmp>
-  <button *ngIf="onSave.observed"
+  <button *ngIf="saveEnabled && onSave.observed"
           (click)="save()"
           type="button"
           class="btn btn-success">{{ saveTitle }}</button>
+  <!--
   <button *ngIf="!onSave.observed"
           type="submit"
           class="btn btn-success">{{ saveTitle }}</button>
+  -->
 </ng-template>

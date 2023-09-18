@@ -1,7 +1,7 @@
-import { Component, OnDestroy, OnInit, forwardRef } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild, forwardRef } from '@angular/core';
 import { BaseFormPageComponent } from '@core/base-pages/base-form-page';
 import { ComputerModel, ComputerModelNames } from '../computer.models';
-import { UntypedFormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroupDirective, UntypedFormGroup, Validators } from '@angular/forms';
 import { ComputerService } from '../computer.service';
 import { Observable } from 'rxjs';
 import { ConfirmAction } from '@core/services/modal.service';
@@ -13,10 +13,10 @@ import { ConfirmAction } from '@core/services/modal.service';
   providers: [{ provide: BaseFormPageComponent, useExisting: forwardRef(() => EditComponent) }]
 
 })
-export class EditComponent extends BaseFormPageComponent<ComputerModel> implements OnInit{
+export class EditComponent extends BaseFormPageComponent<ComputerModel> implements OnInit {
   public readonly controlNames = ComputerModelNames;
 
-  constructor(computerSvc: ComputerService) {
+  constructor(computerSvc: ComputerService, private fb: FormBuilder) {
     super(computerSvc);
   }
 

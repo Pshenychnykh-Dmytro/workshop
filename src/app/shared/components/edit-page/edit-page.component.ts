@@ -9,7 +9,7 @@ import { PageFooterDirective } from '@shared/directives/page-footer.directive';
   templateUrl: './edit-page.component.html',
   styleUrls: ['./edit-page.component.scss']
 })
-export class EditPageComponent implements OnInit, AfterViewInit, AfterContentInit, DoCheck {
+export class EditPageComponent implements OnInit, AfterContentInit, DoCheck {
   @Input()
   public removeTitle = 'Delete';
   @Input()
@@ -17,15 +17,15 @@ export class EditPageComponent implements OnInit, AfterViewInit, AfterContentIni
   @Input()
   public saveTitle = 'Save';
   @Input()
-  public editMode = false;
+  public removeEnabled = true;
+  @Input()
+  public cancelEnabled = true;
+  @Input()
+  public saveEnabled = true;
   @Input()
   public loading = true;
   @Input()
   public useProvider = false;
-  @Input()
-  public formGroup: FormGroup;
-
-  public viewLoaded = false;
 
   public get formGroupProp(): FormGroup {
     return this.useProvider ? this.parent.formGroup : null; // this.formGroup : null;
@@ -35,8 +35,20 @@ export class EditPageComponent implements OnInit, AfterViewInit, AfterContentIni
     return this.useProvider ? this.parent.loading : this.loading;
   }
 
-  public get editModeProp(): boolean {
-    return this.useProvider ? this.parent.editMode : this.editMode;
+  public get removeEnabledProp(): boolean {
+    return this.useProvider ? this.parent.editMode : (this.removeEnabled && this.onRemove.observed);
+  }
+
+  public get cancelEnabledProp(): boolean {
+    return this.useProvider || (this.cancelEnabled && this.onRemove.observed);
+  }
+
+  public get saveEnabledProp(): boolean {
+    return this.useProvider || (this.saveEnabled && this.onRemove.observed);
+  }
+
+  public get footerObserved(): boolean {
+    return this.useProvider || this.onCancel.observed || this.onSave.observed || this.onRemove.observed;
   }
 
   @Output() onSave = new EventEmitter();
@@ -52,14 +64,9 @@ export class EditPageComponent implements OnInit, AfterViewInit, AfterContentIni
   constructor(@Optional()
               private parent: BaseFormPageComponent<any>,
               private detector: ChangeDetectorRef)
-              //public formGroupDirective: FormGroupDirective)
   { }
 
   ngOnInit(): void {
-
-    // this.parent.initByRouteParam('id');
-
-    // this.formGroupDirective.form
   }
 
   ngAfterContentInit(): void {
@@ -67,14 +74,6 @@ export class EditPageComponent implements OnInit, AfterViewInit, AfterContentIni
       // const fg = this.formGroupDirective;
       // this.parent.loadingChanged.subscribe(loading => this.loading = loading);
     }
-  }
-
-  ngAfterViewInit(): void {
-    /*
-    if(this.useProvider) {
-      this.parent.loadingChanged.subscribe(loading => this.loading = loading);
-    }*/
-    // this.viewLoaded = true;
   }
 
   ngDoCheck(): void {
