@@ -6,6 +6,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormContentDirective } from './directives/form-content.directive';
 import { PageFooterDirective } from './directives/page-footer.directive';
 import { BaseFormPageProviderDirective } from './directives/base-form-page-provider.directive';
+import { ControlWrapperComponent } from './components/control-wrapper/control-wrapper.component';
+import { InputDirective } from './directives/input.directive';
 
 
 
@@ -15,7 +17,9 @@ import { BaseFormPageProviderDirective } from './directives/base-form-page-provi
     EditPageFooterComponent,
     FormContentDirective,
     PageFooterDirective,
-    BaseFormPageProviderDirective
+    BaseFormPageProviderDirective,
+    ControlWrapperComponent,
+    InputDirective
   ],
   imports: [
     CommonModule,
@@ -23,8 +27,10 @@ import { BaseFormPageProviderDirective } from './directives/base-form-page-provi
     ReactiveFormsModule
   ],
   exports: [
+    ControlWrapperComponent,
     EditPageComponent,
     EditPageFooterComponent,
+    InputDirective,
     FormContentDirective,
     PageFooterDirective
   ]

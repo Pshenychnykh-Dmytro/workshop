@@ -1,0 +1,14 @@
+<div class="mb-3">
+  <div class="input-group">
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="basic-addon1">{{ title | titlecase }}</span>
+    </div>
+    <ng-content>
+    </ng-content>
+  </div>
+  <div>
+    <span class="text-danger">
+      {{ errorMessage$ | async }}
+    </span>
+  </div>
+</div>

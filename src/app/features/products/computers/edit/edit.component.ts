@@ -16,7 +16,7 @@ import { ConfirmAction } from '@core/services/modal.service';
 export class EditComponent extends BaseFormPageComponent<ComputerModel> implements OnInit {
   public readonly controlNames = ComputerModelNames;
 
-  constructor(computerSvc: ComputerService, private fb: FormBuilder) {
+  constructor(computerSvc: ComputerService) {
     super(computerSvc);
   }
 
@@ -32,11 +32,8 @@ export class EditComponent extends BaseFormPageComponent<ComputerModel> implemen
     const { series, model } = this.controlNames;
     return this.buildFormGroup(viewModel, {
       validators: {
-        [model]: [Validators.required],
+        [model]: [Validators.required, Validators.maxLength(10)],
         [series]: [Validators.required],
-        options: {
-          field1: [Validators.required]
-        }
       }
     });
   }
@@ -44,10 +41,5 @@ export class EditComponent extends BaseFormPageComponent<ComputerModel> implemen
   @ConfirmAction()
   public override remove(): void {
     super.remove();
-  }
-
-  @ConfirmAction('YES PLS')
-  public override save(): void {
-    super.save();
   }
 }

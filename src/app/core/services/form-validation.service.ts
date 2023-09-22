@@ -153,7 +153,7 @@ enum ValueKeys {
   requiredLength = 'requiredLength',
   step = 'stepValue',
   noWhiteSpace = 'noWhiteSpace',
-  whitespaceAtTheBeginning = 'whitespaceAtTheBeginnings',
+  whitespaceAtTheBeginning = 'whitespaceAtTheBeginning',
   whitespaceAtTheEnd = 'whitespaceAtTheEnd',
   multipleWhitespaces = 'multipleWhitespaces',
   whitespaceAtTheBorder = 'whitespaceAtTheBorder',
