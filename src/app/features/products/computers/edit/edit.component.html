@@ -1,53 +1,50 @@
-<app-edit-page [loading]="loading"
-               [useProvider]="true">
-
+<app-edit-page>
               <!--
+                [loading]="loading"
+               [removeEnabled]="editMode"
                (onSave)="save()"
                (onCancel)="cancel()"
-               (onRemove)="remove()">
+               (onRemove)="remove()"
+               >
               -->
   <ng-template appFormContent>
     <h3>Computer</h3>
     <ng-container [formGroup]="formGroup">
-    <div class="row">
-      <div class="col">
-        <app-control-wrapper>
-          <input [formControlName]="controlNames.id"
-                 appInput
-                 type="text" readonly placeholder="ID" aria-label="Username" aria-describedby="basic-addon1">
-        </app-control-wrapper>
-        <app-control-wrapper>
-          <input [formControlName]="controlNames.model"
-                 appInput
-                 type="text"  placeholder="Model" aria-label="Username" aria-describedby="basic-addon1">
-        </app-control-wrapper>
-        <app-control-wrapper [title]="'Series'">
-          <input [formControlName]="controlNames.series"
-                 appInput
-                 type="text" placeholder="Series" aria-label="Username" aria-describedby="basic-addon1">
-        </app-control-wrapper>
-        <app-control-wrapper [title]="'HDD'">
-          <input [formControlName]="controlNames.hdd"
-                 appInput
-                 type="text" placeholder="HDD" aria-label="Username" aria-describedby="basic-addon1">
-        </app-control-wrapper>
-        <app-control-wrapper  [title]="'Memory'">
-          <input [formControlName]="controlNames.memory"
-                 appInput
-                 type="text" placeholder="Memory" aria-label="Username" aria-describedby="basic-addon1">
-        </app-control-wrapper>
-        <app-control-wrapper [title]="'Type'">
-          <input [formControlName]="controlNames.type"
-                 appInput
-                 type="text" placeholder="Type" aria-label="Type" aria-describedby="basic-addon1">
-        </app-control-wrapper>
-        <app-control-wrapper [title]="'Price'">
-          <input [formControlName]="controlNames.price"
-                 appInput
-                 type="text" placeholder="Price" aria-label="Price" aria-describedby="basic-addon1">
-        </app-control-wrapper>
-      </div>
-    </div>
+      <app-control-wrapper>
+        <input [formControlName]="controlNames.id"
+               appInput
+               type="text" readonly placeholder="ID" aria-label="Username" aria-describedby="basic-addon1">
+      </app-control-wrapper>
+      <app-control-wrapper>
+        <input [formControlName]="controlNames.model"
+               appInput
+               type="text"  placeholder="Model" aria-label="Username" aria-describedby="basic-addon1">
+      </app-control-wrapper>
+      <app-control-wrapper [title]="'Series'">
+        <input [formControlName]="controlNames.series"
+               appInput
+               type="text" placeholder="Series" aria-label="Username" aria-describedby="basic-addon1">
+      </app-control-wrapper>
+      <app-control-wrapper [title]="'HDD'">
+        <input [formControlName]="controlNames.hdd"
+               appInput
+               type="text" placeholder="HDD" aria-label="Username" aria-describedby="basic-addon1">
+      </app-control-wrapper>
+      <app-control-wrapper  [title]="'Memory'">
+        <input [formControlName]="controlNames.memory"
+               appInput
+               type="text" placeholder="Memory" aria-label="Username" aria-describedby="basic-addon1">
+      </app-control-wrapper>
+      <app-control-wrapper [title]="'Type'">
+        <input [formControlName]="controlNames.type"
+               appInput
+               type="text" placeholder="Type" aria-label="Type" aria-describedby="basic-addon1">
+      </app-control-wrapper>
+      <app-control-wrapper [title]="'Price'">
+        <input [formControlName]="controlNames.price"
+               appInput
+               type="text" placeholder="Price" aria-label="Price" aria-describedby="basic-addon1">
+      </app-control-wrapper>
     </ng-container>
   </ng-template>
 </app-edit-page>

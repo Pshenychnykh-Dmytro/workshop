@@ -1,10 +1,19 @@
-<div *ngIf="loadingProp; else useProvider ? providerBlock : defaultBlock" class="d-flex justify-content-center">
+<div *ngIf="loadingProp; else defaultBlock" class="d-flex justify-content-center">
   <div class="spinner-border p-3" role="status">
     <span class="visually-hidden">Loading...</span>
   </div>
 </div>
 
+<ng-template #defaultBlock>
+  <div class="row">
+    <div class="col">
+      <ng-container *ngTemplateOutlet="formContent?.templateRef || defaultContent;"></ng-container>
+      <ng-container *ngTemplateOutlet="pageFooter?.templateRef || defaultFooter;"></ng-container>
+    </div>
+  </div>
+</ng-template>
 
+<!--
 <ng-template #providerBlock>
   <form [formGroup]="formGroupProp"
         (ngSubmit)="save()">
@@ -12,11 +21,7 @@
     <ng-container *ngTemplateOutlet="pageFooter?.templateRef || defaultFooter;"></ng-container>
   </form>
 </ng-template>
-
-<ng-template #defaultBlock>
-  <ng-container *ngTemplateOutlet="formContent?.templateRef || defaultContent;"></ng-container>
-  <ng-container *ngTemplateOutlet="pageFooter?.templateRef || defaultFooter;"></ng-container>
-</ng-template>
+-->
 
 <ng-template #defaultFooter>
   <app-edit-page-footer *ngIf="footerObserved"

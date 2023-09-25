@@ -1,5 +1,5 @@
-import { AfterContentInit, AfterViewInit, ChangeDetectorRef, Component, ContentChild, DoCheck, EventEmitter, Input, OnInit, Optional, Output } from '@angular/core';
-import { FormGroup, FormGroupDirective } from '@angular/forms';
+import { AfterViewInit, ChangeDetectorRef, Component, ContentChild, DoCheck, EventEmitter, Input, OnInit, Optional, Output } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { BaseFormPageComponent } from '@core/base-pages/base-form-page';
 import { FormContentDirective } from '@shared/directives/form-content.directive';
 import { PageFooterDirective } from '@shared/directives/page-footer.directive';
@@ -9,7 +9,9 @@ import { PageFooterDirective } from '@shared/directives/page-footer.directive';
   templateUrl: './edit-page.component.html',
   styleUrls: ['./edit-page.component.scss']
 })
-export class EditPageComponent implements OnInit, AfterContentInit, DoCheck {
+export class EditPageComponent implements AfterViewInit, DoCheck {
+  public useProvider = false;
+
   @Input()
   public removeTitle = 'Delete';
   @Input()
@@ -24,8 +26,7 @@ export class EditPageComponent implements OnInit, AfterContentInit, DoCheck {
   public saveEnabled = true;
   @Input()
   public loading = true;
-  @Input()
-  public useProvider = false;
+
 
   public get formGroupProp(): FormGroup {
     return this.useProvider ? this.parent.formGroup : null; // this.formGroup : null;
@@ -40,11 +41,11 @@ export class EditPageComponent implements OnInit, AfterContentInit, DoCheck {
   }
 
   public get cancelEnabledProp(): boolean {
-    return this.useProvider || (this.cancelEnabled && this.onRemove.observed);
+    return this.useProvider || (this.cancelEnabled && this.onCancel.observed);
   }
 
   public get saveEnabledProp(): boolean {
-    return this.useProvider || (this.saveEnabled && this.onRemove.observed);
+    return this.useProvider || (this.saveEnabled && this.onSave.observed);
   }
 
   public get footerObserved(): boolean {
@@ -64,16 +65,14 @@ export class EditPageComponent implements OnInit, AfterContentInit, DoCheck {
   constructor(@Optional()
               private parent: BaseFormPageComponent<any>,
               private detector: ChangeDetectorRef)
-  { }
-
-  ngOnInit(): void {
-  }
-
-  ngAfterContentInit(): void {
-    if(this.useProvider) {
-      // const fg = this.formGroupDirective;
-      // this.parent.loadingChanged.subscribe(loading => this.loading = loading);
+  {
+    if(this.parent) {
+      this.useProvider = true;
     }
+  }
+  
+  ngAfterViewInit(): void {
+    this.detector.detectChanges();
   }
 
   ngDoCheck(): void {

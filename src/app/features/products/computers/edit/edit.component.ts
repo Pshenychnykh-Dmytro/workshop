@@ -1,9 +1,8 @@
-import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild, forwardRef } from '@angular/core';
+import { Component, OnInit, forwardRef } from '@angular/core';
 import { BaseFormPageComponent } from '@core/base-pages/base-form-page';
 import { ComputerModel, ComputerModelNames } from '../computer.models';
-import { FormBuilder, FormGroupDirective, UntypedFormGroup, Validators } from '@angular/forms';
+import { UntypedFormGroup, Validators } from '@angular/forms';
 import { ComputerService } from '../computer.service';
-import { Observable } from 'rxjs';
 import { ConfirmAction } from '@core/services/modal.service';
 
 @Component({
